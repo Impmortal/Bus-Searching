@@ -1,4 +1,5 @@
 Bus-Searching
 =============
 
-Search for bus for transporting between 2 areas
+Program that help user seach for bus for travelling within ladkraban subdistrict
+
