@@ -108,6 +108,8 @@ def bus_img(bus_no):
 
 def bus_pop(bus_list):
     display = Toplevel()
+    dismsg = Message(display, text='List of Bus(es)')
+    dismsg.pack()
     for each in bus_list:
         Button(display, text='Bus Route '+str(each), command=lambda x = each: bus_img(x)).pack()
 
@@ -131,7 +133,12 @@ def increase(delete, num):
 
     delete.destroy()
     bus_search(num)
-    
+
+def reset_all(dele):
+    global collect
+    collect = 0
+
+    dele.destroy()
 
 def pop_img(num):
     topimg = Toplevel()
@@ -155,10 +162,12 @@ def pop_img(num):
         no.pack(side=RIGHT, ipadx=50)
     else:
         nope = Message(topimg, text=\
-                       'You have already selected starting and destination point!?')
+                       'You have already selected starting and destination point!?\nDo you want to reset the previous setting?')
+        reset = Button(topimg, text='Reset', command=lambda x = topimg: reset_all(topimg))
         no = Button(topimg, text='Cancel', command=topimg.destroy)
         nope.pack()
-        no.pack(ipadx=50)
+        reset.pack(side=LEFT, ipadx=50)
+        no.pack(side=RIGHT, ipadx=50)
 
 def topplace():
     top = Toplevel()
