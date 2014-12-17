@@ -4,11 +4,6 @@ from PIL import Image, ImageTk
 root = Tk()
 root.geometry('{}x{}'.format(1000, 600))
 
-list_img = [imgblank , imgptt, imgtpi, imgprom, imgprom, imgprawet, imgivory/
-            imgcon, imgphoe, imgkriss, imgkmitl, imglad, imgjura,/
-            imgpaseo, imgpark, imgpolice, imgmanage, imgmail, imgtax,/
-            imgtemp, imgmarket, imgtrain]
-
 FilePtt = '001.png'
 imgptt = ImageTk.PhotoImage(Image.open(FilePtt))
 
@@ -61,7 +56,7 @@ FileTax = '017.png'
 imgtax = ImageTk.PhotoImage(Image.open(FileTax))
 
 FileTemp = '018.png'
-imgTemp = ImageTk.PhotoImage(Image.open(FileTemp))
+imgtemp = ImageTk.PhotoImage(Image.open(FileTemp))
 
 FileMarket = '019.png'
 imgmarket = ImageTk.PhotoImage(Image.open(FileMarket))
@@ -69,35 +64,105 @@ imgmarket = ImageTk.PhotoImage(Image.open(FileMarket))
 FileTrain = '020.png'
 imgtrain = ImageTk.PhotoImage(Image.open(FileTrain))
 
-def pop_img():
+list_img = ['imgblank' , imgptt, imgtpi, imgprom, imgprawet, imgivory,\
+            imgcon, imgphoe, imgkriss, imgkmitl, imglad, imgjura,\
+            imgpaseo, imgpark, imgpolice, imgmanage, imgmail, imgtax,\
+            imgtemp, imgmarket, imgtrain]
+
+list_text = ['Do you want to set this place as your starting point?', \
+             'Do you want to set this place as your destination?']
+
+collect = 0
+
+def increase(delete):
+    global collect
+    collect += 1
+
+    delete.destroy()
+
+def pop_img(num):
     topimg = Toplevel()
 
     tempframe = Frame(topimg)
-    tempcanvas = Canvas(tempframe, height=404, width=404)
+    tempcanvas = Canvas(tempframe, height=410, width=410)
 
-    tempcanvas.create_image(0,0,image=tempimg,anchor='nw')
+    tempcanvas.create_image(0,0,image=list_img[num],anchor='nw')
     
     tempcanvas.pack()
     tempframe.pack()
+
+    global collect
+    yes = Button(topimg, text='Confirm', command=lambda x = topimg: increase(topimg))
+    no = Button(topimg, text='Cancel', command=topimg.destroy)
+    ask = Message(topimg, text=list_text[collect])
+
+    ask.pack()
+    yes.pack(side=LEFT, ipadx=50)
+    no.pack(side=RIGHT, ipadx=50)
 
 def topplace():
     top = Toplevel()
     top.title('List of Places')
 
-    ptt = Button(top, text='Lat Krabang Bangkok Hospital', command=lambda x = )
+    ptt = Button(top, text='PTT NGV Gas Station', command=lambda x = 1: pop_img(x))
     ptt.pack()
 
-    tpi = Button(top, text='Lat Krabang Bangkok Hospital', command=lambda x = )
+    tpi = Button(top, text='TPI Oil Station', command=lambda x = 2: pop_img(x))
     tpi.pack()
 
-    prom = Button(top, text='Lat Krabang Bangkok Hospital', command=lambda x = )
+    prom = Button(top, text='Prom School', command=lambda x = 3: pop_img(x))
     prom.pack()
 
-    prawet = Button(top, text='Lat Krabang Bangkok Hospital', command=lambda x = )
+    prawet = Button(top, text='Prawet Pitthayakarn School', command=lambda x = 4: pop_img(x))
     prawet.pack()
 
-    hospit = Button(top, text='Lat Krabang Bangkok Hospital', command=lambda x = )    
-    hospit.pack()
+    ivory = Button(top, text='Ivory Bangkok Hotel', command=lambda x = 5: pop_img(x))
+    ivory.pack()
+
+    con = Button(top, text='Convenient Resort Hotel', command=lambda x = 6: pop_img(x))
+    con.pack()
+
+    phoe = Button(top, text='Phoenix hotel Bangkok', command=lambda x = 7: pop_img(x))
+    phoe.pack()
+
+    kriss = Button(top, text='Kriss Residence Hotel', command=lambda x = 8: pop_img(x))
+    kriss.pack()
+
+    kmitl = Button(top, text='King Mongkut Institute of Technology Ladkrabang', command=lambda x = 9: pop_img(x))
+    kmitl.pack()
+
+    lad = Button(top, text='Lad Krabang Bangkok Hospital', command=lambda x = 10: pop_img(x))
+    lad.pack()
+
+    jura = Button(top, text='Jurarat 8 Hospital', command=lambda x = 11: pop_img(x))
+    jura.pack()
+
+    paseo = Button(top, text='The Paseo Lad Krabang', command=lambda x = 12: pop_img(x))
+    paseo.pack()
+
+    park = Button(top, text='Pranakorn Park', command=lambda x = 13: pop_img(x))
+    park.pack()
+
+    police = Button(top, text='Lad Krabang Police Station', command=lambda x = 14: pop_img(x))
+    police.pack()
+
+    manage = Button(top, text='Lad Krabang District Office', command=lambda x = 15: pop_img(x))
+    manage.pack()
+
+    mail = Button(top, text='Lad Krabang Post Office', command=lambda x = 16: pop_img(x))
+    mail.pack()
+
+    tax = Button(top, text='Lad Krabang Area Revenue Branch Office', command=lambda x = 17: pop_img(x))
+    tax.pack()
+
+    temp = Button(top, text='Wat Sam', command=lambda x = 18: pop_img(x))
+    temp.pack()
+
+    market = Button(top, text='Suwannabhumi Market', command=lambda x = 19: pop_img(x))
+    market.pack()
+
+    train = Button(top, text='Airport Rail Link & Train Station Lad Krabang', command=lambda x = 20: pop_img(x))
+    train.pack()
     
 menubar = Menu(root)
 menubar.add_command(label="Quit!", command=root.quit)
