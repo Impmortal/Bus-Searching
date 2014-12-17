@@ -136,7 +136,11 @@ def increase(delete, num):
 
 def reset_all(dele):
     global collect
+    global search_list
+    global bus_list
     collect = 0
+    search_list = []
+    bus_list = []
 
     dele.destroy()
 
@@ -231,7 +235,7 @@ def topplace():
     market.pack()
     
 menubar = Menu(root)
-menubar.add_command(label="Quit!", command=root.quit)
+menubar.add_command(label="Quit!", command=root.destroy)
 
 root.config(menu=menubar)
 
