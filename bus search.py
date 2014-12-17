@@ -72,7 +72,10 @@ list_img = ['imgblank' , imgptt, imgtpi, imgprom, imgprawet, imgivory,\
 list_text = ['Do you want to set this place as your starting point?', \
              'Do you want to set this place as your destination?']
 
-dict_bus = {}
+dict_bus = {1013:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19],\
+            553:[1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,18,19],\
+            517:[1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,18,19],\
+            92:[20,1,2,5,12,3,4,6],550:[7,8,14,1,2,5,12,3,4,6]}}
 
 collect = 0
 def increase(delete):
