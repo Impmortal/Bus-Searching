@@ -72,8 +72,9 @@ list_img = ['imgblank' , imgptt, imgtpi, imgprom, imgprawet, imgivory,\
 list_text = ['Do you want to set this place as your starting point?', \
              'Do you want to set this place as your destination?']
 
-collect = 0
+dict_bus = {}
 
+collect = 0
 def increase(delete):
     global collect
     collect += 1
@@ -92,13 +93,20 @@ def pop_img(num):
     tempframe.pack()
 
     global collect
-    yes = Button(topimg, text='Confirm', command=lambda x = topimg: increase(topimg))
-    no = Button(topimg, text='Cancel', command=topimg.destroy)
-    ask = Message(topimg, text=list_text[collect])
+    if collect < 2:
+        yes = Button(topimg, text='Confirm', command=lambda x = topimg: increase(topimg))
+        no = Button(topimg, text='Cancel', command=topimg.destroy)
+        ask = Message(topimg, text=list_text[collect])
 
-    ask.pack()
-    yes.pack(side=LEFT, ipadx=50)
-    no.pack(side=RIGHT, ipadx=50)
+        ask.pack()
+        yes.pack(side=LEFT, ipadx=50)
+        no.pack(side=RIGHT, ipadx=50)
+    else:
+        nope = Message(topimg, text=\
+                       'You have already selected starting and destination point!?')
+        no = Button(topimg, text='Cancel', command=topimg.destroy)
+        nope.pack()
+        no.pack(ipadx=50)
 
 def topplace():
     top = Toplevel()
