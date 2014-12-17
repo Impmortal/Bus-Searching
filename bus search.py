@@ -64,6 +64,18 @@ imgmarket = ImageTk.PhotoImage(Image.open(FileMarket))
 FileTrain = '020.png'
 imgtrain = ImageTk.PhotoImage(Image.open(FileTrain))
 
+FileBus553 = 'b1.jpg'
+imgbus553 = ImageTk.PhotoImage(Image.open(FileBus553))
+
+FileBus1013 = 'b2.jpg'
+imgbus1013 = ImageTk.PhotoImage(Image.open(FileBus1013))
+
+FileBus517 = 'b3.jpg'
+imgbus517 = ImageTk.PhotoImage(Image.open(FileBus517))
+
+FileBus550 = 'b4.jpg'
+imgbus550 = ImageTk.PhotoImage(Image.open(FileBus550))
+
 list_img = ['imgblank' , imgptt, imgtpi, imgprom, imgprawet, imgivory,\
             imgcon, imgphoe, imgkriss, imgkmitl, imglad, imgjura,\
             imgpaseo, imgpark, imgpolice, imgmanage, imgmail, imgtax,\
@@ -75,14 +87,51 @@ list_text = ['Do you want to set this place as your starting point?', \
 dict_bus = {1013:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19],\
             553:[1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,18,19],\
             517:[1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,18,19],\
-            92:[20,1,2,5,12,3,4,6],550:[7,8,14,1,2,5,12,3,4,6]}}
+            550:[7,8,14,1,2,5,12,3,4,6]}
+
+all_bus = {1013: imgbus1013, 553: imgbus553, 517: imgbus517, 550: imgbus550}
 
 collect = 0
-def increase(delete):
+search_list = []
+bus_list = []
+
+def bus_img(bus_no):
+    busimg = Toplevel()
+
+    busframe = Frame(busimg)
+    buscanvas = Canvas(busframe, height=410, width=410)
+
+    buscanvas.create_image(0,0,image=all_bus[bus_no],anchor='nw')
+    
+    buscanvas.pack()
+    busframe.pack()
+
+def bus_pop(bus_list):
+    display = Toplevel()
+    for each in bus_list:
+        Button(display, text='Bus Route '+str(each), command=lambda x = each: bus_img(x)).pack()
+
+def bus_search(num):
+    search_list.append(num)
+
+    if len(search_list) == 2:
+        global dict_bus
+        for bus in dict_bus:
+            check = 0
+            for place in search_list:
+                if place in dict_bus[bus]:
+                    check += 1
+            if check == 2:
+                bus_list.append(bus)
+        bus_pop(bus_list)
+
+def increase(delete, num):
     global collect
     collect += 1
 
     delete.destroy()
+    bus_search(num)
+    
 
 def pop_img(num):
     topimg = Toplevel()
@@ -97,7 +146,7 @@ def pop_img(num):
 
     global collect
     if collect < 2:
-        yes = Button(topimg, text='Confirm', command=lambda x = topimg: increase(topimg))
+        yes = Button(topimg, text='Confirm', command=lambda x = topimg: increase(topimg, num))
         no = Button(topimg, text='Cancel', command=topimg.destroy)
         ask = Message(topimg, text=list_text[collect])
 
@@ -171,9 +220,6 @@ def topplace():
 
     market = Button(top, text='Suwannabhumi Market', command=lambda x = 19: pop_img(x))
     market.pack()
-
-    train = Button(top, text='Airport Rail Link & Train Station Lad Krabang', command=lambda x = 20: pop_img(x))
-    train.pack()
     
 menubar = Menu(root)
 menubar.add_command(label="Quit!", command=root.quit)
